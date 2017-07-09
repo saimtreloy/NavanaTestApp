@@ -8,7 +8,9 @@ import android.preference.PreferenceManager;
  * Created by Android on 1/16/2017.
  */
 public class SharedPrefDatabase {
-    public static final String PREFS_KEY_SONG = "AOP_PREFS_SONGS";
+    public static final String KEY_FUTURE_PROJECT = "KEY_FUTURE_PROJECT";
+    public static final String KEY_OTHER_PROJECT = "KEY_OTHER_PROJECT";
+    public static final String KEY_MAP_PROJECT = "KEY_MAP_PROJECT";
 
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
@@ -19,12 +21,32 @@ public class SharedPrefDatabase {
         editor = sharedPreferences.edit();
     }
 
-    public void StoreSong(String data){
-        editor.putString(PREFS_KEY_SONG, data);
+    public void StoreFutureProject(String data){
+        editor.putString(KEY_FUTURE_PROJECT, data);
         editor.commit();
     }
-    public String RetriveSong(){
-        String text = sharedPreferences.getString(PREFS_KEY_SONG, null);
+    public String RetriveFutureProject(){
+        String text = sharedPreferences.getString(KEY_FUTURE_PROJECT, null);
+        return text;
+    }
+
+
+    public void StoreOtherProject(String data){
+        editor.putString(KEY_OTHER_PROJECT, data);
+        editor.commit();
+    }
+    public String RetriveOtherProject(){
+        String text = sharedPreferences.getString(KEY_OTHER_PROJECT, null);
+        return text;
+    }
+
+
+    public void StoreMapProject(String data){
+        editor.putString(KEY_MAP_PROJECT, data);
+        editor.commit();
+    }
+    public String RetriveMapProject(){
+        String text = sharedPreferences.getString(KEY_MAP_PROJECT, null);
         return text;
     }
 

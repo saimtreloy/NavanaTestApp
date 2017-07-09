@@ -6,6 +6,7 @@ import android.net.ConnectivityManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
@@ -17,6 +18,11 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.moodybugs.saim.navanatestapp.Utility.ApiUrl;
 import com.moodybugs.saim.navanatestapp.Utility.MySingleton;
+import com.moodybugs.saim.navanatestapp.Utility.XmlParser;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
 
 public class Splash extends AppCompatActivity {
 
@@ -44,6 +50,33 @@ public class Splash extends AppCompatActivity {
                     public void onResponse(String response) {
                         try {
                             txtLoading.setText("Future project loading complete");
+
+                            XmlParser xmlParser = new XmlParser();
+                            Document doc = xmlParser.getDomElement(response);
+                            NodeList nl = doc.getElementsByTagName("project");
+
+                            for (int i = 0; i < nl.getLength(); i++) {
+
+                                Element e = (Element) nl.item(i);
+                                String id = xmlParser.getValue(e, "id");
+                                String name = xmlParser.getValue(e, "name");
+                                String type = xmlParser.getValue(e, "type");
+                                String status = xmlParser.getValue(e, "status");
+                                String size = xmlParser.getValue(e, "size");
+                                String city = xmlParser.getValue(e, "city");
+                                String area_name = xmlParser.getValue(e, "area_name");
+                                String address = xmlParser.getValue(e, "address");
+                                String longitude = xmlParser.getValue(e, "longitude");
+                                String latitude = xmlParser.getValue(e, "latitude");
+                                String image = xmlParser.getValue(e, "image");
+
+                                Log.d("SAIM XML PARSE", "ID : "+ id +" \n" +
+                                        "name : "+ name +" \n" +
+                                        "type : "+ type +" \n" +
+                                        "status : "+ status +" \n" +
+                                        "size : "+ size +" \n");
+                            }
+
                             SaveOtherProject();
                         }catch (Exception e){
 
