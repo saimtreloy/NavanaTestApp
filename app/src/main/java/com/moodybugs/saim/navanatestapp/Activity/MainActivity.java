@@ -1,7 +1,9 @@
-package com.moodybugs.saim.navanatestapp;
+package com.moodybugs.saim.navanatestapp.Activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.moodybugs.saim.navanatestapp.R;
 
 public class MainActivity extends AppCompatActivity {
 

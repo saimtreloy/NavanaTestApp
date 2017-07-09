@@ -1,4 +1,4 @@
-package com.moodybugs.saim.navanatestapp;
+package com.moodybugs.saim.navanatestapp.Activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -16,8 +16,10 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.moodybugs.saim.navanatestapp.R;
 import com.moodybugs.saim.navanatestapp.Utility.ApiUrl;
 import com.moodybugs.saim.navanatestapp.Utility.MySingleton;
+import com.moodybugs.saim.navanatestapp.Utility.SharedPrefDatabase;
 import com.moodybugs.saim.navanatestapp.Utility.XmlParser;
 
 import org.w3c.dom.Document;
@@ -50,6 +52,7 @@ public class Splash extends AppCompatActivity {
                     public void onResponse(String response) {
                         try {
                             txtLoading.setText("Future project loading complete");
+                            new SharedPrefDatabase(getApplicationContext()).StoreFutureProject(response);
 
                             XmlParser xmlParser = new XmlParser();
                             Document doc = xmlParser.getDomElement(response);
@@ -99,6 +102,7 @@ public class Splash extends AppCompatActivity {
                     public void onResponse(String response) {
                         try {
                             txtLoading.setText("Other project loading complete");
+                            new SharedPrefDatabase(getApplicationContext()).StoreOtherProject(response);
                             SaveMapProjectList();
                         }catch (Exception e){
 
@@ -120,6 +124,7 @@ public class Splash extends AppCompatActivity {
                     public void onResponse(String response) {
                         try {
                             txtLoading.setText("Map project list loading complete");
+                            new SharedPrefDatabase(getApplicationContext()).StoreMapProject(response);
                             finish();
                             startActivity(new Intent(getApplicationContext(), MainActivity.class));
                         }catch (Exception e){
