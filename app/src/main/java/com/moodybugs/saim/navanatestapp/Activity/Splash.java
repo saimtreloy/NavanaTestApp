@@ -53,33 +53,6 @@ public class Splash extends AppCompatActivity {
                         try {
                             txtLoading.setText("Future project loading complete");
                             new SharedPrefDatabase(getApplicationContext()).StoreFutureProject(response);
-
-                            XmlParser xmlParser = new XmlParser();
-                            Document doc = xmlParser.getDomElement(response);
-                            NodeList nl = doc.getElementsByTagName("project");
-
-                            for (int i = 0; i < nl.getLength(); i++) {
-
-                                Element e = (Element) nl.item(i);
-                                String id = xmlParser.getValue(e, "id");
-                                String name = xmlParser.getValue(e, "name");
-                                String type = xmlParser.getValue(e, "type");
-                                String status = xmlParser.getValue(e, "status");
-                                String size = xmlParser.getValue(e, "size");
-                                String city = xmlParser.getValue(e, "city");
-                                String area_name = xmlParser.getValue(e, "area_name");
-                                String address = xmlParser.getValue(e, "address");
-                                String longitude = xmlParser.getValue(e, "longitude");
-                                String latitude = xmlParser.getValue(e, "latitude");
-                                String image = xmlParser.getValue(e, "image");
-
-                                Log.d("SAIM XML PARSE", "ID : "+ id +" \n" +
-                                        "name : "+ name +" \n" +
-                                        "type : "+ type +" \n" +
-                                        "status : "+ status +" \n" +
-                                        "size : "+ size +" \n");
-                            }
-
                             SaveOtherProject();
                         }catch (Exception e){
 

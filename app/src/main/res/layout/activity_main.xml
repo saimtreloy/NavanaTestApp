@@ -2,6 +2,7 @@
 <android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.moodybugs.saim.navanatestapp.Activity.MainActivity">
@@ -38,7 +39,6 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:layout_marginTop="?attr/actionBarSize"
-        app:itemIconTint="#FFFFFF"
         app:itemTextAppearance="@style/TextAppearance.AppCompat.Medium"
         app:menu="@menu/item_menu">
 

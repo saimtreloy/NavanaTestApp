@@ -1,0 +1,87 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:padding="26dp"
+    tools:context="com.moodybugs.saim.navanatestapp.Fragment.FragmentHome">
+
+    <LinearLayout
+        android:id="@+id/layout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnProjectFuture"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:padding="10dp"
+            android:textAlignment="center"
+            android:text="Future\nProjects"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="#4b4c4f"
+            android:background="@drawable/ic_shape_main_layout"
+            android:drawableTop="@drawable/ic_projects"/>
+
+        <Button
+            android:id="@+id/btnProjectOther"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:padding="10dp"
+            android:textAlignment="center"
+            android:text="Other\nProjects"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="#4b4c4f"
+            android:background="@drawable/ic_shape_main_layout"
+            android:drawableTop="@drawable/ic_projects"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/layout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/layout1">
+
+        <Button
+            android:id="@+id/btnMapProject"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:padding="10dp"
+            android:textAlignment="center"
+            android:text="Project\nMaps"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="#4b4c4f"
+            android:background="@drawable/ic_shape_main_layout"
+            android:drawableTop="@drawable/ic_map_project"/>
+
+        <Button
+            android:id="@+id/btnGroupWork"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:padding="10dp"
+            android:textAlignment="center"
+            android:text="Group\nWork"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="#4b4c4f"
+            android:background="@drawable/ic_shape_main_layout"
+            android:drawableTop="@drawable/ic_group"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

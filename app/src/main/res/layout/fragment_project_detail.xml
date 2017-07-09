@@ -1,0 +1,122 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.moodybugs.saim.navanatestapp.Fragment.FragmentProjectDetail">
+
+    <ImageView
+        android:id="@+id/imgProjectDetail"
+        android:layout_width="match_parent"
+        android:layout_height="240dp"
+        android:scaleType="fitXY"
+        android:layout_alignParentTop="true"/>
+    <RelativeLayout
+        android:id="@+id/layoutProDetail"
+        android:layout_width="match_parent"
+        android:layout_height="240dp">
+        <ProgressBar
+            android:id="@+id/progDetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:indeterminateDrawable="@drawable/animation"/>
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:layout_below="@id/layoutProDetail">
+
+        <TextView
+            android:id="@+id/txtProDetailName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Navana HR Tower"
+            android:textColor="@android:color/holo_red_light"
+            android:textSize="20dp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/txtProDetailAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Address : "
+            android:textSize="16dp"/>
+        <TextView
+            android:id="@+id/txtProDetailSize"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Size : "
+            android:textSize="16dp"/>
+        <TextView
+            android:id="@+id/txtProDetailType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Type : "
+            android:textSize="16dp"/>
+        <TextView
+            android:id="@+id/txtProDetailStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Status : "
+            android:textSize="16dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        android:background="#3f3f3f"
+        android:gravity="center_vertical"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+
+        <ImageView
+            android:id="@+id/imgBtnLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:src="@drawable/ic_project_location" />
+
+        <ImageView
+            android:id="@+id/imgBtnShare"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:src="@drawable/ic_project_share" />
+
+        <ImageView
+            android:id="@+id/imgBtnMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:src="@drawable/ic_project_message" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="end|center_vertical">
+
+            <ImageView
+                android:id="@+id/imgBtnCall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:src="@drawable/ic_project_call" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>
