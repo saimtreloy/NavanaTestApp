@@ -19,6 +19,7 @@
         android:orientation="horizontal">
 
         <TextView
+            android:id="@+id/txtMapAll"
             android:layout_weight="1"
             android:gravity="center"
             android:layout_width="match_parent"
@@ -26,6 +27,7 @@
             android:textSize="16sp"
             android:text="All"/>
         <TextView
+            android:id="@+id/txtMapDhaka"
             android:layout_weight="1"
             android:gravity="center"
             android:layout_width="match_parent"
@@ -33,6 +35,7 @@
             android:textSize="16sp"
             android:text="Dhaka"/>
         <TextView
+            android:id="@+id/txtMapChittagong"
             android:layout_weight="1"
             android:gravity="center"
             android:layout_width="match_parent"
