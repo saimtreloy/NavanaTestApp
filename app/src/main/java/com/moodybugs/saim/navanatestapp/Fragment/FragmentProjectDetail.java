@@ -1,7 +1,9 @@
 package com.moodybugs.saim.navanatestapp.Fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.renderscript.Double2;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +17,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
+import com.moodybugs.saim.navanatestapp.Activity.MapsActivity;
 import com.moodybugs.saim.navanatestapp.R;
 import com.moodybugs.saim.navanatestapp.Utility.ApiUrl;
 
@@ -27,7 +30,10 @@ public class FragmentProjectDetail extends Fragment {
     ImageView imgProjectDetail;
     TextView txtProDetailName, txtProDetailAddress, txtProDetailSize, txtProDetailType, txtProDetailStatus;
 
-    String name, address, size, type, status, image;
+    String id, name, type,status, size, city, area_name, address, image;
+    Double longitude, latitude;
+
+    ImageView imgBtnLocation, imgBtnShare, imgBtnMessage, imgBtnCall;
 
     public FragmentProjectDetail() {
 
@@ -39,11 +45,17 @@ public class FragmentProjectDetail extends Fragment {
         view = inflater.inflate(R.layout.fragment_project_detail, container, false);
 
         //String strtext = getArguments().getString("edttext");
+
+        id = getArguments().getString("Id");
         name = getArguments().getString("Name");
-        address = getArguments().getString("Address");
-        size = getArguments().getString("Size");
         type = getArguments().getString("Type");
         status = getArguments().getString("Status");
+        size = getArguments().getString("Size");
+        city = getArguments().getString("City");
+        area_name = getArguments().getString("AreaName");
+        address = getArguments().getString("Address");
+        longitude = getArguments().getDouble("Longitude");
+        latitude = getArguments().getDouble("Latitude");
         image = getArguments().getString("Image");
 
         init();
@@ -61,7 +73,13 @@ public class FragmentProjectDetail extends Fragment {
         txtProDetailType = (TextView) view.findViewById(R.id.txtProDetailType);
         txtProDetailStatus = (TextView) view.findViewById(R.id.txtProDetailStatus);
 
+        imgBtnLocation = (ImageView) view.findViewById(R.id.imgBtnLocation);
+        imgBtnShare = (ImageView) view.findViewById(R.id.imgBtnShare);
+        imgBtnMessage = (ImageView) view.findViewById(R.id.imgBtnMessage);
+        imgBtnCall = (ImageView) view.findViewById(R.id.imgBtnCall);
+
         populateViews();
+
     }
 
 
@@ -89,6 +107,21 @@ public class FragmentProjectDetail extends Fragment {
         txtProDetailSize.setText("Size : " + size);
         txtProDetailType.setText("Type : " + type);
         txtProDetailStatus.setText("Status : " + status);
+
+        btnClicked();
     }
 
+
+    public void btnClicked(){
+        imgBtnLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), MapsActivity.class);
+                intent.putExtra("Lat", latitude);
+                intent.putExtra("Lon", longitude);
+                intent.putExtra("Name", name);
+                startActivity(intent);
+            }
+        });
+    }
 }

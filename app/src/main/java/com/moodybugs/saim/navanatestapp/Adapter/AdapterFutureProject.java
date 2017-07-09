@@ -104,18 +104,28 @@ public class AdapterFutureProject extends RecyclerView.Adapter<AdapterFutureProj
 
         @Override
         public void onClick(View v) {
+            String id = adapterList.get(getAdapterPosition()).getId();
             String name = adapterList.get(getAdapterPosition()).getName();
-            String address = adapterList.get(getAdapterPosition()).getAddress();
-            String size = adapterList.get(getAdapterPosition()).getSize();
             String type = adapterList.get(getAdapterPosition()).getType();
             String status = adapterList.get(getAdapterPosition()).getStatus();
+            String size = adapterList.get(getAdapterPosition()).getSize();
+            String city = adapterList.get(getAdapterPosition()).getCity();
+            String area_name = adapterList.get(getAdapterPosition()).getArea_name();
+            String address = adapterList.get(getAdapterPosition()).getAddress();
+            String longitude = adapterList.get(getAdapterPosition()).getLongitude();
+            String latitude = adapterList.get(getAdapterPosition()).getLatitude();
             String image = ApiUrl.imageLink + adapterList.get(getAdapterPosition()).getImage();
             Bundle bundle = new Bundle();
+            bundle.putString("Id", id);
             bundle.putString("Name", name);
-            bundle.putString("Address", address);
-            bundle.putString("Size", size);
             bundle.putString("Type", type);
             bundle.putString("Status", status);
+            bundle.putString("Size", size);
+            bundle.putString("City", city);
+            bundle.putString("AreaName", area_name);
+            bundle.putString("Address", address);
+            bundle.putDouble("Longitude", Double.parseDouble(longitude) );
+            bundle.putDouble("Latitude", Double.parseDouble(latitude));
             bundle.putString("Image", image);
 
             FragmentProjectDetail fragmentProjectDetail = new FragmentProjectDetail();

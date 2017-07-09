@@ -1,6 +1,7 @@
 package com.moodybugs.saim.navanatestapp.Fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -8,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.moodybugs.saim.navanatestapp.Activity.MapsActivity;
+import com.moodybugs.saim.navanatestapp.Activity.MapsActivityForAllProject;
 import com.moodybugs.saim.navanatestapp.R;
 
 
@@ -58,6 +61,14 @@ public class FragmentHome extends Fragment {
                 fragmentTransaction.replace(R.id.main_container, new FragmentProjectOther());
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
+            }
+        });
+
+        btnMapProject.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), MapsActivityForAllProject.class);
+                startActivity(intent);
             }
         });
     }
