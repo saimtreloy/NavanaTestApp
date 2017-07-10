@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.moodybugs.saim.navanatestapp.Activity.MapsActivity;
+import com.moodybugs.saim.navanatestapp.Activity.Chat.GroupLoginActivity;
 import com.moodybugs.saim.navanatestapp.Activity.MapsActivityForAllProject;
 import com.moodybugs.saim.navanatestapp.R;
 
@@ -68,6 +68,14 @@ public class FragmentHome extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), MapsActivityForAllProject.class);
+                startActivity(intent);
+            }
+        });
+
+        btnGroupWork.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), GroupLoginActivity.class);
                 startActivity(intent);
             }
         });

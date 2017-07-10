@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.moodybugs.saim.navanatestapp.Activity.Chat.GroupLoginActivity">
+
+
+    <RelativeLayout
+        android:id="@+id/layoutToolbarGroupLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include layout="@layout/toolbar" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/layoutToolbarGroupLogin"
+        android:gravity="center_horizontal">
+
+        <ImageView
+            android:id="@+id/imgLogoGL"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="40dp"
+            app:srcCompat="@drawable/ic_logo" />
+
+        <TextView
+            android:id="@+id/txtLogoGL"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imgLogoGL"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="-10dp"
+            android:text="Different \u2022 Dependable \u2022 Definitive"
+            android:textColor="#333"
+            android:textSize="6dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/txtLogoGL"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:padding="26dp">
+
+            <EditText
+                android:id="@+id/inputGLUser"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:layout_below="@id/txtLogoGL"
+                android:background="@drawable/rounded"
+                android:ems="10"
+                android:hint="User Name"
+                android:inputType="textPersonName"
+                android:padding="10dp"
+                android:textAlignment="center"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/inputGLPass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:layout_below="@id/txtLogoGL"
+                android:background="@drawable/rounded"
+                android:ems="10"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:padding="10dp"
+                android:textAlignment="center"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/btnLoginGL"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:text="Login"
+                android:textAllCaps="false"
+                android:layout_centerHorizontal="true"
+                android:textSize="16sp"
+                android:background="@drawable/rounded"
+                android:shadowColor="@color/colorAccent"
+                style="@android:style/Widget.DeviceDefault.Button.Borderless" />
+
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/progProjectGL"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginBottom="16dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:visibility="invisible"
+            android:indeterminateDrawable="@drawable/animation"/>
+
+    </RelativeLayout>
+
+
+</RelativeLayout>
