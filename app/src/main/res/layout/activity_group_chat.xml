@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.moodybugs.saim.navanatestapp.Activity.Chat.GroupChatActivity">
+
+    <RelativeLayout
+        android:id="@+id/layoutToolbarAGC"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include layout="@layout/toolbar" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/layoutChatOption"
+        android:padding="16dp"
+        android:orientation="vertical"
+        android:layout_below="@+id/layoutToolbarAGC">
+
+        <ScrollView
+            android:id="@+id/scrollAGC"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:focusable="true"
+            android:focusableInTouchMode="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/layoutChat"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txtConversation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:background="@drawable/rounded"
+                    android:textSize="16dp"
+                    android:padding="8dp"
+                    android:visibility="gone"
+                    android:text="" />
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/layoutChatOption"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingBottom="16dp"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/inputChat"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:ems="10"
+            android:background="@drawable/rounded"
+            android:padding="10dp"
+            android:layout_marginRight="2dp"
+            android:hint="Chat here"/>
+        <ImageView
+            android:id="@+id/btnSend"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:layout_marginLeft="2dp"
+            android:src="@drawable/ic_send"
+            android:background="@drawable/rounded"
+            android:text="SEND" />
+    </LinearLayout>
+
+</RelativeLayout>

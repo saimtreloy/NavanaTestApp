@@ -46,7 +46,8 @@
             android:name=".Activity.MapsActivityForAllProject"
             android:label="@string/title_activity_maps_for_all_project" />
         <activity android:name=".Activity.Chat.GroupLoginActivity" />
-        <activity android:name=".Activity.Chat.GroupActivity"></activity>
+        <activity android:name=".Activity.Chat.GroupActivity" />
+        <activity android:name=".Activity.Chat.GroupChatActivity"></activity>
     </application>
 
 </manifest>
