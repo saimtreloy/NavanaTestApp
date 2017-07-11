@@ -1,6 +1,10 @@
 package com.moodybugs.saim.navanatestapp.Activity.Chat;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -43,6 +47,8 @@ public class GroupActivity extends AppCompatActivity {
 
     DatabaseReference root = FirebaseDatabase.getInstance().getReference().getRoot();
 
+    ProgressDialog progressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +56,11 @@ public class GroupActivity extends AppCompatActivity {
 
         name = getIntent().getExtras().getString("USER_NAME");
 
+        if (haveStoragePermission()){
+
+        }else {
+            haveStoragePermission();
+        }
         init();
     }
 
@@ -110,5 +121,20 @@ public class GroupActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    public boolean haveStoragePermission() {
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (getApplicationContext().checkSelfPermission(android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
+                    && getApplicationContext().checkSelfPermission(android.Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+                return true;
+            } else {
+                ActivityCompat.requestPermissions(this , new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE, android.Manifest.permission.CAMERA}, 1);
+                return false;
+            }
+        }
+        else {
+            return true;
+        }
     }
 }
