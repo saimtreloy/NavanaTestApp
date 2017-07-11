@@ -1,9 +1,14 @@
 package com.moodybugs.saim.navanatestapp.Fragment;
 
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.renderscript.Double2;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -57,6 +62,13 @@ public class FragmentProjectDetail extends Fragment {
         longitude = getArguments().getDouble("Longitude");
         latitude = getArguments().getDouble("Latitude");
         image = getArguments().getString("Image");
+
+
+        if (haveStoragePermission()){
+
+        }else {
+            haveStoragePermission();
+        }
 
         init();
 
@@ -123,5 +135,41 @@ public class FragmentProjectDetail extends Fragment {
                 startActivity(intent);
             }
         });
+
+        imgBtnShare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.putExtra(Intent.EXTRA_TEXT, "http://navana-realestate.com/");
+                sendIntent.setType("text/plain");
+                startActivity(sendIntent);
+            }
+        });
+
+        imgBtnCall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_CALL);
+                intent.setData(Uri.parse("tel:" + "16254"));
+                startActivity(intent);
+            }
+        });
     }
+
+
+    public boolean haveStoragePermission() {
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (getContext().checkSelfPermission(Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
+                return true;
+            } else {
+                ActivityCompat.requestPermissions(getActivity() , new String[]{Manifest.permission.CALL_PHONE}, 1);
+                return false;
+            }
+        }
+        else {
+            return true;
+        }
+    }
+
 }

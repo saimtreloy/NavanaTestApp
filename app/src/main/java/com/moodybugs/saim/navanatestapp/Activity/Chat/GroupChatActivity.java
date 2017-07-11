@@ -84,7 +84,11 @@ public class GroupChatActivity extends AppCompatActivity {
         btnSend = (ImageView) findViewById(R.id.btnSend);
         imgUploadImage = (ImageView) findViewById(R.id.imgUploadImage);
         scrollAGC = (ScrollView) findViewById(R.id.scrollAGC);
-        scrollAGC.fullScroll(ScrollView.FOCUS_DOWN);
+        scrollAGC.post(new Runnable() {
+            public void run() {
+                scrollAGC.fullScroll(scrollAGC.FOCUS_DOWN);
+            }
+        });
 
         progressDialog = new ProgressDialog(this);
 
@@ -108,7 +112,11 @@ public class GroupChatActivity extends AppCompatActivity {
                     map1.put("message", msg);
                     message_root.updateChildren(map1);
                     inputChat.setText("");
-                    scrollAGC.scrollTo(0, scrollAGC.getBottom());
+                    scrollAGC.post(new Runnable() {
+                        public void run() {
+                            scrollAGC.fullScroll(scrollAGC.FOCUS_DOWN);
+                        }
+                    });
                 }
             }
         });
@@ -127,13 +135,21 @@ public class GroupChatActivity extends AppCompatActivity {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 allChatConversation(dataSnapshot);
-                scrollAGC.fullScroll(ScrollView.FOCUS_DOWN);
+                scrollAGC.post(new Runnable() {
+                    public void run() {
+                        scrollAGC.fullScroll(scrollAGC.FOCUS_DOWN);
+                    }
+                });
             }
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
                 allChatConversation(dataSnapshot);
-                scrollAGC.fullScroll(ScrollView.FOCUS_DOWN);
+                scrollAGC.post(new Runnable() {
+                    public void run() {
+                        scrollAGC.fullScroll(scrollAGC.FOCUS_DOWN);
+                    }
+                });
             }
 
             @Override
@@ -225,7 +241,11 @@ public class GroupChatActivity extends AppCompatActivity {
                 }
             }
         }
-        scrollAGC.fullScroll(ScrollView.FOCUS_DOWN);
+        scrollAGC.post(new Runnable() {
+            public void run() {
+                scrollAGC.fullScroll(scrollAGC.FOCUS_DOWN);
+            }
+        });
     }
 
 
