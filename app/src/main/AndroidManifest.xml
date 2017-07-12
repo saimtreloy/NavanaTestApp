@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
@@ -45,7 +46,8 @@
         <activity android:name=".Activity.Chat.GroupLoginActivity" />
         <activity android:name=".Activity.Chat.GroupActivity" />
         <activity android:name=".Activity.Chat.GroupChatActivity" />
-        <activity android:name=".Activity.Chat.ActivityImageFullscreen"></activity>
+        <activity android:name=".Activity.Chat.ActivityImageFullscreen" />
+
     </application>
 
 </manifest>

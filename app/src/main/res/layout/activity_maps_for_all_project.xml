@@ -15,9 +15,18 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#44111111"
+        android:background="#99111111"
         android:orientation="horizontal">
 
+        <TextView
+            android:id="@+id/txtMapCurrent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:textSize="16sp"
+            android:textColor="#FFF"
+            android:text="Current"/>
         <TextView
             android:id="@+id/txtMapAll"
             android:layout_weight="1"
@@ -25,6 +34,7 @@
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:textSize="16sp"
+            android:textColor="#FFF"
             android:text="All"/>
         <TextView
             android:id="@+id/txtMapDhaka"
@@ -33,6 +43,7 @@
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:textSize="16sp"
+            android:textColor="#FFF"
             android:text="Dhaka"/>
         <TextView
             android:id="@+id/txtMapChittagong"
@@ -41,6 +52,7 @@
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:textSize="16sp"
+            android:textColor="#FFF"
             android:text="Chittagong"/>
 
     </LinearLayout>

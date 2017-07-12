@@ -108,7 +108,6 @@ public class FragmentProjectDetail extends Fragment {
                     public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
                         progDetail.setVisibility(View.GONE);
                         imgProjectDetail.setVisibility(View.VISIBLE);
-                        Toast.makeText(getContext(), "Image Ready", Toast.LENGTH_SHORT).show();
                         return false;
                     }
                 })

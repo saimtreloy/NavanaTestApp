@@ -6,9 +6,13 @@
         android:icon="@drawable/ic_home"
         android:title="Home" />
     <item
-        android:id="@+id/btnMenuProject"
+        android:id="@+id/btnMenuProjectFuture"
         android:icon="@drawable/ic_projects"
-        android:title="Projects" />
+        android:title="Future Projects" />
+    <item
+        android:id="@+id/btnMenuProjectOther"
+        android:icon="@drawable/ic_projects"
+        android:title="Other Projects" />
     <item
         android:id="@+id/btnMenuMapProject"
         android:icon="@drawable/ic_map_project"
