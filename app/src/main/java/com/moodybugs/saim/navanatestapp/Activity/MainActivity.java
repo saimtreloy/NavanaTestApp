@@ -24,6 +24,7 @@ import com.moodybugs.saim.navanatestapp.Fragment.FragmentHome;
 import com.moodybugs.saim.navanatestapp.Fragment.FragmentProjectFuture;
 import com.moodybugs.saim.navanatestapp.Fragment.FragmentProjectOther;
 import com.moodybugs.saim.navanatestapp.R;
+import com.moodybugs.saim.navanatestapp.Service.MyService;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -38,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        startService(new Intent(getApplicationContext(), MyService.class));
 
         if(haveStoragePermission()){
 

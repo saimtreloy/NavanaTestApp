@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -15,6 +16,7 @@ import android.text.style.StyleSpan;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -37,7 +39,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.moodybugs.saim.navanatestapp.Activity.MapsActivity;
 import com.moodybugs.saim.navanatestapp.R;
+import com.moodybugs.saim.navanatestapp.Utility.SharedPrefDatabase;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -102,6 +106,8 @@ public class GroupChatActivity extends AppCompatActivity {
                 if (msg.isEmpty()){
                     Toast.makeText(getApplicationContext(), "Chat message empty!", Toast.LENGTH_SHORT).show();
                 }else {
+                    Toast.makeText(getApplicationContext(), new SharedPrefDatabase(getApplicationContext()).RetriveLat() + "\n" +
+                            new SharedPrefDatabase(getApplicationContext()).RetriveLon(), Toast.LENGTH_SHORT).show();
                     Map<String, Object> map = new HashMap<>();
                     temp_key = root.push().getKey();
                     root.updateChildren(map);
@@ -110,6 +116,8 @@ public class GroupChatActivity extends AppCompatActivity {
                     Map<String, Object> map1 = new HashMap<>();
                     map1.put("name", UserName);
                     map1.put("message", msg);
+                    map1.put("lat", new SharedPrefDatabase(getApplicationContext()).RetriveLat());
+                    map1.put("lon", new SharedPrefDatabase(getApplicationContext()).RetriveLon());
                     message_root.updateChildren(map1);
                     inputChat.setText("");
                     scrollAGC.post(new Runnable() {
@@ -169,27 +177,49 @@ public class GroupChatActivity extends AppCompatActivity {
         });
     }
 
-    String chatMsg, chatUserName;
+    String chatMsg, chatUserName, lat, lon, latAndLong;
     @SuppressLint("NewApi")
     private void allChatConversation(DataSnapshot dataSnapshot) {
         Iterator i = dataSnapshot.getChildren().iterator();
         int j = 1000;
         while (i.hasNext()){
+            lat = (String) ((DataSnapshot)i.next()).getValue();
+            lon = (String) ((DataSnapshot)i.next()).getValue();
+            latAndLong = lat + "," + lon;
             chatMsg = (String) ((DataSnapshot)i.next()).getValue();
             chatUserName = (String) ((DataSnapshot)i.next()).getValue();
 
+
             if (chatMsg.contains("firebasestorage.googleapis.com")){
                 LinearLayout linearLayout = (LinearLayout) findViewById(R.id.layoutChat);
-                final ImageView txt1 = new ImageView(this);
-                txt1.setBackgroundResource(R.drawable.rounded);
-                txt1.setPadding(20,20,20,20);
+
+                LinearLayout child = new LinearLayout(getApplicationContext());
+                child.setOrientation(LinearLayout.HORIZONTAL);
+                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.WRAP_CONTENT);
+                layoutParams.setMargins(10,10,150,10);
+                child.setLayoutParams(layoutParams);
+                linearLayout.addView(child);
+
+                TextView txtUser = new TextView(this);
+                txtUser.setBackgroundResource(R.drawable.chat_right);
+                txtUser.setPadding(20, 20, 20, 20);
+                LinearLayout.LayoutParams params1 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                params1.setMargins(10, 10, 10, 10);
+                txtUser.setLayoutParams(params1);
+
+                final ImageView img = new ImageView(this);
+                img.setBackgroundResource(R.drawable.rounded);
+                img.setPadding(20,20,20,20);
                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(400,400);
-                params.setMargins(10,10,10,10);
-                txt1.setLayoutParams(params);
-                linearLayout.addView(txt1);
-                Glide.with(getApplicationContext())
-                        .load(chatMsg)
-                        .listener(new RequestListener<String, GlideDrawable>() {
+                img.setLayoutParams(params);
+
+                child.addView(txtUser);
+                child.addView(img);
+
+                String s = chatUserName.substring(0,1).toUpperCase();
+                txtUser.setText(s);
+
+                Glide.with(getApplicationContext()).load(chatMsg).listener(new RequestListener<String, GlideDrawable>() {
                             @Override
                             public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
                                 return false;
@@ -201,44 +231,97 @@ public class GroupChatActivity extends AppCompatActivity {
                                 return false;
                             }
                         })
-                        .into(txt1);
-                txt1.setTag(chatMsg);
+                        .into(img);
+                img.setTag(chatMsg);
+                img.setContentDescription(latAndLong);
 
-                txt1.setOnClickListener(new View.OnClickListener() {
+                img.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent(getApplicationContext(), ActivityImageFullscreen.class);
-                        intent.putExtra("FULLSCREEN_IMAGE", txt1.getTag().toString());
-                        Log.d("IMAGE TAG", txt1.getTag().toString());
+                        intent.putExtra("FULLSCREEN_IMAGE", img.getTag().toString());
+                        Log.d("IMAGE TAG", img.getTag().toString());
                         startActivity(intent);
                     }
                 });
                 if (chatUserName.equals(UserName)){
-                    params.gravity = Gravity.END;
+                    child.setGravity(Gravity.END);
+                    layoutParams.setMargins(150, 10, 10, 10);
+                    child.setLayoutParams(layoutParams);
+
+                    child.removeView(txtUser);
+                    txtUser.setBackgroundResource(R.drawable.chat_left);
+                    child.addView(txtUser);
                 }
+
+                img.setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View v) {
+                        String f=img.getContentDescription().toString();
+                        double lat = Double.parseDouble(f.substring(0, f.indexOf(",")));
+                        double lon = Double.parseDouble(f.substring(f.indexOf(",")+1)) ;
+                        Intent intent = new Intent(getApplicationContext(), MapsActivity.class);
+                        intent.putExtra("Lat", lat);
+                        intent.putExtra("Lon", lon);
+                        intent.putExtra("Name", "Location When Text You");
+                        startActivity(intent);
+                        return false;
+                    }
+                });
             }else {
-
                 LinearLayout linearLayout = (LinearLayout) findViewById(R.id.layoutChat);
-                TextView txt1 = new TextView(this);
-                txt1.setBackgroundResource(R.drawable.chat_left);
-                txt1.setPadding(20, 20, 20, 20);
-                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+
+                LinearLayout child = new LinearLayout(getApplicationContext());
+                child.setOrientation(LinearLayout.HORIZONTAL);
+                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.WRAP_CONTENT);
+                child.setLayoutParams(layoutParams);
+                linearLayout.addView(child);
+
+                final TextView txtMsg = new TextView(this);
+                txtMsg.setBackgroundResource(R.drawable.chat_left);
+                txtMsg.setPadding(20, 20, 20, 20);
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                 params.setMargins(10, 10, 150, 10);
-                txt1.setLayoutParams(params);
-                linearLayout.addView(txt1);
+                txtMsg.setLayoutParams(params);
 
-                SpannableStringBuilder sb = new SpannableStringBuilder(chatUserName);
-                StyleSpan bss = new StyleSpan(android.graphics.Typeface.BOLD);
-                sb.setSpan(bss, 0, chatUserName.length() - 1, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+                TextView txtUser = new TextView(this);
+                txtUser.setBackgroundResource(R.drawable.chat_right);
+                txtUser.setPadding(20, 20, 20, 20);
+                LinearLayout.LayoutParams params1 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                params1.setMargins(10, 10, 10, 10);
+                txtUser.setLayoutParams(params1);
 
-                txt1.setText(sb + "\n" + chatMsg);
+                child.addView(txtUser);
+                child.addView(txtMsg);
+
+                txtMsg.setText(chatMsg);
+                txtMsg.setContentDescription(latAndLong);
+                String s = chatUserName.substring(0,1).toUpperCase();
+                txtUser.setText(s);
 
                 if (chatUserName.toLowerCase().equals(UserName.toLowerCase())) {
-                    txt1.setBackgroundResource(R.drawable.chat_right);
+                    child.setGravity(Gravity.END);
+                    txtMsg.setBackgroundResource(R.drawable.chat_right);
                     params.setMargins(150, 10, 10, 10);
-                    txt1.setGravity(Gravity.END);
-                    txt1.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_END);
+                    txtMsg.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_END);
+                    child.removeView(txtUser);
+                    txtUser.setBackgroundResource(R.drawable.chat_left);
+                    child.addView(txtUser);
                 }
+
+                txtMsg.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String f=txtMsg.getContentDescription().toString();
+                        double lat = Double.parseDouble(f.substring(0, f.indexOf(",")));
+                        double lon = Double.parseDouble(f.substring(f.indexOf(",")+1)) ;
+                        Intent intent = new Intent(getApplicationContext(), MapsActivity.class);
+                        intent.putExtra("Lat", lat);
+                        intent.putExtra("Lon", lon);
+                        intent.putExtra("Name", "Location When Text You");
+                        startActivity(intent);
+                    }
+                });
             }
         }
         scrollAGC.post(new Runnable() {
@@ -273,6 +356,8 @@ public class GroupChatActivity extends AppCompatActivity {
                     Map<String, Object> map1 = new HashMap<>();
                     map1.put("name", UserName);
                     map1.put("message", downloadUri);
+                    map1.put("lat", new SharedPrefDatabase(getApplicationContext()).RetriveLat());
+                    map1.put("lon", new SharedPrefDatabase(getApplicationContext()).RetriveLon());
                     message_root.updateChildren(map1);
 
                     Log.d("DOWNLOAD URI", downloadUri);
